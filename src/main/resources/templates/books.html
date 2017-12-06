@@ -8,6 +8,13 @@
     <title>Books</title>
 </head>
 <body>
+    <haeder>
+        <a href="/">
+            <img src="https://t4.ftcdn.net/jpg/01/11/56/95/240_F_111569519_UeLlDhAN9Vj8WYHUMueg7NauZhTwsn0C.jpg"
+                 style="width: 140px; height: 140px;"
+            >
+        </a>
+    </haeder>
     <div style="margin-left: 150px; margin-top: 150px;">
         <h2>Books:</h2>
         <ul>
@@ -15,7 +22,6 @@
                 <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}"></a>
             </li>
         </ul>
-        <a href="/books">books</a>
     </div>
 </body>
 </html>
