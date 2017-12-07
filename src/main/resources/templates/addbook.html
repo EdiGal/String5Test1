@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+    <title>Document</title>
+</head>
+<body>
+<div>
+
+    <form method="POST  " action="/books">
+        <input type="text" id="bookname" placeholder="Name"><br>
+        <input type="text" id="bookisbn" placeholder="isbn"><br>
+        <label for="authors">Choose Author:</label>
+        <input name="authors" id="authors" type="checkbox" th:each="author : ${authors}" th:text="${author.firstName}" th:attr="data-name=${author.firstName}">
+        <input id="addbook" type="submit" value="Add Book">
+    </form>
+</div>
+
+<script>
+    $("#addbook").click(async function (e) {
+        e.preventDefault();
+//        names = []
+//        $("input[name='authors']:checked").each((index, tag)=>{
+//            names.push( $(tag).attr('data-name') )
+//        })
+        let book = {
+            "title": $("#bookname").val(),
+            "isbn": $("#bookisbn").val()//,
+//            "Publisher": {
+//                "name": "Publisher name test",
+//                "address": "Publisher address test"
+//            },
+//            "authors": []
+        }
+//        names.forEach(name => {
+//            let author = {"firstName": name, lastName: "temp lastName"}
+//            book.authors.push(author)
+//        })
+        console.log(book)
+        $.ajax({
+            url:"/book",
+            type:"POST",
+            data:JSON.stringify(book),
+            contentType:"application/json;",
+//            dataType:"json",
+            success: function(successRes){
+                console.log("successRes")
+                console.log(successRes)
+            }
+        }).done(function(doneRes){
+            console.log("doneRes")
+            console.log(doneRes)
+        }).fail(function(failRes){
+            console.log("failRes")
+            console.log(failRes)
+        });
+    })
+</script>
+
+</body>
+</html>
